@@ -1,7 +1,7 @@
 'use client';
 import { CssBaseline, CssVarsProvider, GlobalStyles } from '@mui/joy';
 import { QueryClientProvider } from '@tanstack/react-query';
-import TabsContainer from '~/components/TabsContainer';
+import TabsContainer from '~/components/tabs-layout/TabsContainer';
 import { queryClient } from '~/queryClient';
 
 export default function Home() {

@@ -8,9 +8,10 @@ export type BrakeUnit = {
   pressure: number;
   max_pressure: number;
 };
+export type BrakeStatusData = Array<BrakeUnit>;
 
 export async function GET(request: Request) {
-  const data: Array<BrakeUnit> = [
+  const data: BrakeStatusData = [
     {
       position: 'FRONT-LEFT',
       type: 'HYDRAULIC',
