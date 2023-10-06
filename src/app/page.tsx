@@ -1,30 +1,29 @@
 'use client';
-import { useState } from 'react';
-import { BrakeUnit } from './api/brake-system/status/route';
+import { CssBaseline, CssVarsProvider, GlobalStyles } from '@mui/joy';
+import { QueryClientProvider } from '@tanstack/react-query';
+import TabsContainer from '~/components/TabsContainer';
+import { queryClient } from '~/queryClient';
 
 export default function Home() {
-  const [data, setData] = useState<Array<BrakeUnit>>([]);
-
-  // useEffect(() => {
-  //   fetch('/api/brake-system/status').then(async (response) => {
-  //     const json = (await response.json()) as Array<BrakeUnit>;
-  //     setData(json);
-  //   });
-  // }, []);
-
   return (
-    <main>
-      <div data-testid="company_logo">Volta</div>
-      {data?.map((b) => (
-        <div key={b.position} style={{ padding: 16 }}>
-          <p>{b.position}</p>
-          <p>{b.type}</p>
-          <p>
-            Pressure: {b.pressure}/{b.max_pressure}
-          </p>
-          <p>Temperature: {b.temperature}ºC</p>
-        </div>
-      ))}
-    </main>
+    <CssBaseline>
+      <CssVarsProvider defaultMode="dark">
+        <GlobalStyles
+          styles={{
+            // We recommend using a class over a tag if possible.
+            '.RadixIcon': {
+              color: 'var(--Icon-color)',
+              margin: 'var(--Icon-margin)',
+              fontSize: 'var(--Icon-fontSize, 20px)',
+              width: '1em',
+              height: '1em',
+            },
+          }}
+        />
+        <QueryClientProvider client={queryClient}>
+          <TabsContainer />
+        </QueryClientProvider>
+      </CssVarsProvider>
+    </CssBaseline>
   );
 }
