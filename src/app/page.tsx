@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { BrakeUnit } from './api/brake-system/status/route';
-import styles from './page.module.css';
 
 export default function Home() {
   const [data, setData] = useState<Array<BrakeUnit>>([]);
@@ -14,7 +13,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.grid}>
+    <main>
       {data?.map((b) => (
         <div key={b.position} style={{ padding: 16 }}>
           <p>{b.position}</p>
