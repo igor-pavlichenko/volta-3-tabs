@@ -1,19 +1,20 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BrakeUnit } from './api/brake-system/status/route';
 
 export default function Home() {
   const [data, setData] = useState<Array<BrakeUnit>>([]);
 
-  useEffect(() => {
-    fetch('/api/brake-system/status').then(async (response) => {
-      const json = (await response.json()) as Array<BrakeUnit>;
-      setData(json);
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api/brake-system/status').then(async (response) => {
+  //     const json = (await response.json()) as Array<BrakeUnit>;
+  //     setData(json);
+  //   });
+  // }, []);
 
   return (
     <main>
+      <div data-testid="company_logo">Volta</div>
       {data?.map((b) => (
         <div key={b.position} style={{ padding: 16 }}>
           <p>{b.position}</p>
