@@ -12,12 +12,11 @@ const RadioTab = (props: Props) => {
       variant="plain"
       {...props}
       sx={{
-        padding: 2,
         alignItems: 'center',
         textAlign: 'center',
         textTransform: 'uppercase',
         fontWeight: 600,
-        flexGrow: 1,
+        flex: 1,
       }}
       slotProps={{
         label: ({ checked }) => ({

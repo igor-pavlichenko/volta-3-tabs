@@ -9,7 +9,7 @@ const RadioTabsGroup = (props: Props) => {
       {...props}
       sx={{
         gap: '0.5rem',
-        minHeight: 48,
+        height: 72,
         padding: '0.5rem',
         borderRadius: '12px',
         bgcolor: 'neutral.softBg',
