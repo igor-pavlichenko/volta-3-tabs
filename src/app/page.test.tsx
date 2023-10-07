@@ -3,5 +3,5 @@ import Home from './page';
 
 test('Smoke test', () => {
   render(<Home />);
-  expect(screen.getByTestId('company_logo')).toHaveTextContent('Volta');
+  expect(screen.getByTestId('company_logo')).toHaveAttribute('src');
 });

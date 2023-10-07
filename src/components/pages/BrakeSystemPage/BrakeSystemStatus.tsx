@@ -1,9 +1,11 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import { BrakeStatusData } from '~/app/api/brake-system/status/route';
 
 type Props = {};
 
-const BrakeSystemPage = (props: Props) => {
+const BrakeSystemStatus = (props: Props) => {
   const endpoint = '/api/brake-system/status';
   const { data } = useQuery<BrakeStatusData>({
     queryKey: [endpoint],
@@ -25,4 +27,4 @@ const BrakeSystemPage = (props: Props) => {
   );
 };
 
-export default BrakeSystemPage;
+export default BrakeSystemStatus;

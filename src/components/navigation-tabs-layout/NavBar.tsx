@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <Grid
       container
-      sx={{ width: { xs: '100%', md: '750px' } }}
+      sx={{ width: { xs: '100%' } }}
       justifyContent="center"
       alignItems="center"
       gap={3}
