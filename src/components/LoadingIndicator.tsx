@@ -7,6 +7,7 @@ type Props = {
 const LoadingIndicator = ({ loading }: Props) => {
   return (
     <Box
+      data-testid="LoadingIndicator"
       sx={{
         marginTop: 1,
         width: '100%',

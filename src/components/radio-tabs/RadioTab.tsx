@@ -5,6 +5,7 @@ type Props = RadioProps;
 const RadioTab = (props: Props) => {
   return (
     <Radio
+      data-testid={props.name ?? props.value}
       color="neutral"
       disableIcon
       size="lg"
@@ -29,6 +30,9 @@ const RadioTab = (props: Props) => {
         }),
         action: ({ checked }) => ({
           sx: {
+            '&:active': {
+              bgcolor: (theme) => theme.palette.background.body,
+            },
             ...(checked && {
               bgcolor: 'background.surface',
               boxShadow: 'sm',
