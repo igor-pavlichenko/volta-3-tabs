@@ -1,29 +1,43 @@
 'use client';
 
+import { Stack } from '@mui/joy';
 import { useQuery } from '@tanstack/react-query';
 import { BrakeStatusData } from '~/app/api/brake-system/status/route';
+import LoadingIndicator from '~/components/LoadingIndicator';
+import BrakeUnitCard from './BrakeUnitCard';
 
 type Props = {};
 
 const BrakeSystemStatus = (props: Props) => {
   const endpoint = '/api/brake-system/status';
-  const { data } = useQuery<BrakeStatusData>({
+  const { data, isFetching } = useQuery<BrakeStatusData>({
     queryKey: [endpoint],
     queryFn: async () => (await fetch(endpoint)).json(),
   });
+
+  const frontLeft = data?.find((b) => b.position === 'FRONT-LEFT');
+  const frontRight = data?.find((b) => b.position === 'FRONT-RIGHT');
+  const rearLeft = data?.find((b) => b.position === 'REAR-LEFT');
+  const rearRight = data?.find((b) => b.position === 'REAR-RIGHT');
+  if (!frontLeft || !frontRight || !rearLeft || !rearRight)
+    return <LoadingIndicator loading />;
+
   return (
-    <div>
-      {data?.map((b) => (
-        <div key={b.position} style={{ padding: 16 }}>
-          <p>{b.position}</p>
-          <p>{b.type}</p>
-          <p>
-            Pressure: {b.pressure}/{b.max_pressure}
-          </p>
-          <p>Temperature: {b.temperature}ºC</p>
-        </div>
-      ))}
-    </div>
+    <Stack gap={4} alignItems="center">
+      <LoadingIndicator loading={isFetching} />
+      {data && (
+        <Stack gap={10} maxWidth={600}>
+          <Stack direction="row" justifyContent="center" gap={4}>
+            <BrakeUnitCard unit={frontLeft} />
+            <BrakeUnitCard unit={frontRight} />
+          </Stack>
+          <Stack direction="row" justifyContent="center" gap={4}>
+            <BrakeUnitCard unit={rearLeft} />
+            <BrakeUnitCard unit={rearRight} />
+          </Stack>
+        </Stack>
+      )}
+    </Stack>
   );
 };
 

@@ -4,6 +4,8 @@ import { Stack } from '@mui/joy';
 import { useState } from 'react';
 import RadioTab from '~/components/radio-tabs/RadioTab';
 import RadioTabsGroup from '~/components/radio-tabs/RadioTabsGroup';
+import BrakeSystemMaintenance from './BrakeSystemMaintenance';
+import BrakeSystemStatus from './BrakeSystemStatus';
 
 type BrakeSystemTab = 'status' | 'maintenance';
 type Props = {};
@@ -19,6 +21,9 @@ const BrakeSystemPage = (props: Props) => {
         <RadioTab value="status" label="Status" />
         <RadioTab value="maintenance" label="Maintenance" />
       </RadioTabsGroup>
+
+      {tab === 'status' && <BrakeSystemStatus />}
+      {tab === 'maintenance' && <BrakeSystemMaintenance />}
     </Stack>
   );
 };
