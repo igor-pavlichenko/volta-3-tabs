@@ -19,8 +19,9 @@ const BrakeSystemStatus = (props: Props) => {
   const frontRight = data?.find((b) => b.position === 'FRONT-RIGHT');
   const rearLeft = data?.find((b) => b.position === 'REAR-LEFT');
   const rearRight = data?.find((b) => b.position === 'REAR-RIGHT');
-  if (!frontLeft || !frontRight || !rearLeft || !rearRight)
+  if (!frontLeft || !frontRight || !rearLeft || !rearRight) {
     return <LoadingIndicator loading />;
+  }
 
   return (
     <Stack gap={4} alignItems="center">
