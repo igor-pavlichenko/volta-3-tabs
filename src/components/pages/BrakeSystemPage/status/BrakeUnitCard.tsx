@@ -19,9 +19,9 @@ const BrakeUnitCard = ({ unit }: Props) => {
         <Stack direction="row" alignItems="center" gap={1}>
           <Typography level="title-sm">Health:</Typography>
           {health === 'OK' ? (
-            <RxCheckCircled className="RadixIcon" />
+            <RxCheckCircled className="MyIcon" />
           ) : (
-            <RxExclamationTriangle className="RadixIcon" />
+            <RxExclamationTriangle className="MyIcon" />
           )}
         </Stack>
       </CardContent>

@@ -1,24 +1,28 @@
 'use client';
 import { Stack } from '@mui/joy';
 import { useEffect, useState } from 'react';
+import LoadingIndicator from '~/components/LoadingIndicator';
 import RadioTab from '~/components/radio-tabs/RadioTab';
 import RadioTabsGroup from '~/components/radio-tabs/RadioTabsGroup';
 import { generateRandomTelematicsData } from '~/utils';
+import CurrentTelematics from './current/CurrentTelematics';
 import { useAddTelematicsLog, useGetTelematicsLogs } from './telematicsHooks';
 
 type TelematicsTab = 'state' | 'logs';
 
 const TelematicsPage = () => {
   const [tab, setTab] = useState<TelematicsTab>('state');
+  const [data, setData] = useState(generateRandomTelematicsData());
 
-  const { data: logs } = useGetTelematicsLogs();
+  const { data: logs, isFetching: isFetchingLogs } = useGetTelematicsLogs();
   const { mutate: addLog } = useAddTelematicsLog();
 
   useEffect(() => {
     // in localhost this will actually trigger 2 requests... react caveat
     const interval = setInterval(() => {
-      const newLog = generateRandomTelematicsData();
-      addLog(newLog);
+      const newData = generateRandomTelematicsData();
+      setData(newData);
+      addLog(newData);
     }, 2000);
 
     return () => {
@@ -36,7 +40,9 @@ const TelematicsPage = () => {
         <RadioTab value="logs" label="Logs" />
       </RadioTabsGroup>
 
-      {tab === 'state' && <div>Vehicle state</div>}
+      <LoadingIndicator loading={tab === 'logs' && isFetchingLogs} />
+
+      {tab === 'state' && data && <CurrentTelematics data={data} />}
       {tab === 'logs' && (
         <div>
           {logs?.map((log) => (

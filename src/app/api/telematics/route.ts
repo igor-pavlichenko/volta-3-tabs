@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { TelematicsData } from '~/utils';
+import { TelematicsData, delay } from '~/utils';
 
 export type TelematicsLog = TelematicsData & {
   uuid: string;
@@ -8,8 +8,10 @@ export type TelematicsLog = TelematicsData & {
 const telematicsLogs: Array<TelematicsLog> = [
   {
     uuid: 'bacb55f9-408d-4e82-90ed-6cd489b54978',
-    latitude: 37.7749,
-    longitude: -122.4194,
+    coordinates: {
+      latitude: 37.7749,
+      longitude: -122.4194,
+    },
     speed: 65,
     battery_level: 100,
     battery_temperature: 21, // 15-30
@@ -24,6 +26,7 @@ const telematicsLogs: Array<TelematicsLog> = [
 ];
 
 export async function GET(request: Request) {
+  await delay(200);
   return NextResponse.json(
     telematicsLogs.sort(
       (a, b) =>

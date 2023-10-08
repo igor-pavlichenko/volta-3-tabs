@@ -15,8 +15,10 @@ export function delay(ms: number) {
 }
 
 export type TelematicsData = {
-  latitude: number;
-  longitude: number;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
   speed: number;
   battery_level: number;
   battery_temperature: number;
@@ -29,8 +31,10 @@ export type TelematicsData = {
 };
 export function generateRandomTelematicsData(): TelematicsData {
   const log: TelematicsData = {
-    latitude: randomLatitude(),
-    longitude: randomLongitude(),
+    coordinates: {
+      latitude: randomLatitude(),
+      longitude: randomLongitude(),
+    },
     speed: randomIntFromInterval(0, 120),
     battery_level: randomIntFromInterval(0, 100),
     battery_temperature: randomIntFromInterval(15, 30),

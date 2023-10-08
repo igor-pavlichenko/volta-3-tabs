@@ -21,8 +21,8 @@ export function useAddTelematicsLog() {
       queryClient.setQueryData(
         [endpoint],
         (oldLogs: Array<TelematicsLog> | undefined) => [
-          ...(oldLogs ?? []),
           response,
+          ...(oldLogs ?? []),
         ],
       );
     },

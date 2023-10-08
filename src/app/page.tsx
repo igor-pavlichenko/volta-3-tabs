@@ -12,7 +12,7 @@ export default function Home() {
         <GlobalStyles
           styles={{
             // We recommend using a class over a tag if possible.
-            '.RadixIcon': {
+            '.MyIcon': {
               color: 'var(--Icon-color)',
               margin: 'var(--Icon-margin)',
               fontSize: 'var(--Icon-fontSize, 20px)',
