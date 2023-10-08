@@ -6,6 +6,7 @@ import RadioTab from '~/components/radio-tabs/RadioTab';
 import RadioTabsGroup from '~/components/radio-tabs/RadioTabsGroup';
 import { generateRandomTelematicsData } from '~/utils';
 import CurrentTelematics from './current/CurrentTelematics';
+import TelematicsLogs from './logs/TelematicsLogs';
 import { useAddTelematicsLog, useGetTelematicsLogs } from './telematicsHooks';
 
 type TelematicsTab = 'state' | 'logs';
@@ -43,13 +44,7 @@ const TelematicsPage = () => {
       <LoadingIndicator loading={tab === 'logs' && isFetchingLogs} />
 
       {tab === 'state' && data && <CurrentTelematics data={data} />}
-      {tab === 'logs' && (
-        <div>
-          {logs?.map((log) => (
-            <p key={log.timestamp}>{log.timestamp}</p>
-          ))}
-        </div>
-      )}
+      {tab === 'logs' && logs && <TelematicsLogs logs={logs} />}
     </Stack>
   );
 };

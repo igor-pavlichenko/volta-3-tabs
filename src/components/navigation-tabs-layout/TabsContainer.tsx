@@ -29,7 +29,7 @@ const TabsContainer = (props: Props) => {
           overflow="auto"
           flexGrow={1}
           minWidth={500}
-          maxWidth={600}
+          maxWidth={700}
         >
           <NavBar />
 
