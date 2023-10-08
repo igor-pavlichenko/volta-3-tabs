@@ -1,8 +1,7 @@
 'use client';
-
 import { Box, Sheet, Stack } from '@mui/joy';
 import { useQuery } from '@tanstack/react-query';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
 import BrakeSystemPage from '../pages/BrakeSystemPage/BrakeSystemPage';
 import ClimateControlPage from '../pages/ClimateControlPage/ClimateControlPage';
 import TelematicsPage from '../pages/TelematicsPage/TelematicsPage';
@@ -20,7 +19,7 @@ const TabsContainer = (props: Props) => {
   console.log('data: ', data);
   return (
     <Box display="flex" justifyContent="center" width="100%">
-      <BrowserRouter>
+      <MemoryRouter>
         <Stack
           alignItems="center"
           gap={6}
@@ -45,7 +44,7 @@ const TabsContainer = (props: Props) => {
             </Routes>
           </Sheet>
         </Stack>
-      </BrowserRouter>
+      </MemoryRouter>
     </Box>
   );
 };
