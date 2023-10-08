@@ -39,10 +39,10 @@ export function generateRandomTelematicsData(): TelematicsData {
     battery_level: randomIntFromInterval(0, 100),
     battery_temperature: randomIntFromInterval(15, 30),
     tire_pressure: {
-      front_left: randomIntFromInterval(8, 9),
-      front_right: randomIntFromInterval(8, 9),
-      rear_left: randomIntFromInterval(8, 9),
-      rear_right: randomIntFromInterval(8, 9),
+      front_left: randomIntFromInterval(7, 9),
+      front_right: randomIntFromInterval(7, 9),
+      rear_left: randomIntFromInterval(7, 9),
+      rear_right: randomIntFromInterval(7, 9),
     },
   };
   return log;
