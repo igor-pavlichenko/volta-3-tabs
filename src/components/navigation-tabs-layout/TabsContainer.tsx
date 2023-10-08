@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import BrakeSystemPage from '../pages/BrakeSystemPage/BrakeSystemPage';
 import NavigationPage from '../pages/NavigationPage';
-import TelematicsPage from '../pages/TelematicsPage';
+import TelematicsPage from '../pages/TelematicsPage/TelematicsPage';
 import NavBar from './NavBar';
 
 type Props = {};

@@ -1,190 +1,44 @@
 import { NextResponse } from 'next/server';
+import { TelematicsData } from '~/utils';
 
-const telematicsData = [
+export type TelematicsLog = TelematicsData & {
+  uuid: string;
+  timestamp: string;
+};
+const telematicsLogs: Array<TelematicsLog> = [
   {
+    uuid: 'bacb55f9-408d-4e82-90ed-6cd489b54978',
     latitude: 37.7749,
     longitude: -122.4194,
     speed: 65,
-    fuel_level: 80,
-    engine_temperature: 200,
+    battery_level: 100,
+    battery_temperature: 21, // 15-30
     tire_pressure: {
-      front_left: 35,
-      front_right: 35,
-      rear_left: 34,
-      rear_right: 34,
+      front_left: 9,
+      front_right: 9,
+      rear_left: 9,
+      rear_right: 9,
     },
-    timestamp: '2022-01-01T08:00:00Z',
-  },
-  {
-    latitude: 34.0522,
-    longitude: -118.2437,
-    speed: 55,
-    fuel_level: 75,
-    engine_temperature: 190,
-    tire_pressure: {
-      front_left: 36,
-      front_right: 36,
-      rear_left: 35,
-      rear_right: 35,
-    },
-    timestamp: '2022-01-01T08:05:00Z',
-  },
-  {
-    latitude: 39.7392,
-    longitude: -104.9903,
-    speed: 70,
-    fuel_level: 85,
-    engine_temperature: 210,
-    tire_pressure: {
-      front_left: 34,
-      front_right: 34,
-      rear_left: 33,
-      rear_right: 33,
-    },
-    timestamp: '2022-01-01T08:10:00Z',
-  },
-  {
-    latitude: 29.7604,
-    longitude: -95.3698,
-    speed: 60,
-    fuel_level: 70,
-    engine_temperature: 195,
-    tire_pressure: {
-      front_left: 37,
-      front_right: 37,
-      rear_left: 36,
-      rear_right: 36,
-    },
-    timestamp: '2022-01-01T08:15:00Z',
-  },
-  {
-    latitude: 32.7157,
-    longitude: -117.1611,
-    speed: 50,
-    fuel_level: 65,
-    engine_temperature: 185,
-    tire_pressure: {
-      front_left: 38,
-      front_right: 38,
-      rear_left: 37,
-      rear_right: 37,
-    },
-    timestamp: '2022-01-01T08:20:00Z',
-  },
-  {
-    latitude: 33.4484,
-    longitude: -112.074,
-    speed: 75,
-    fuel_level: 90,
-    engine_temperature: 220,
-    tire_pressure: {
-      front_left: 33,
-      front_right: 33,
-      rear_left: 32,
-      rear_right: 32,
-    },
-    timestamp: '2022-01-01T08:25:00Z',
-  },
-  {
-    latitude: 41.8781,
-    longitude: -87.6298,
-    speed: 45,
-    fuel_level: 60,
-    engine_temperature: 180,
-    tire_pressure: {
-      front_left: 39,
-      front_right: 39,
-      rear_left: 38,
-      rear_right: 38,
-    },
-    timestamp: '2022-01-01T08:30:00Z',
-  },
-  {
-    latitude: 42.3601,
-    longitude: -71.0589,
-    speed: 80,
-    fuel_level: 95,
-    engine_temperature: 230,
-    tire_pressure: {
-      front_left: 32,
-      front_right: 32,
-      rear_left: 31,
-      rear_right: 31,
-    },
-    timestamp: '2022-01-01T08:35:00Z',
-  },
-  {
-    latitude: 47.6062,
-    longitude: -122.3321,
-    speed: 40,
-    fuel_level: 55,
-    engine_temperature: 175,
-    tire_pressure: {
-      front_left: 40,
-      front_right: 40,
-      rear_left: 39,
-      rear_right: 39,
-    },
-    timestamp: '2022-01-01T08:40:00Z',
-  },
-  {
-    latitude: 36.1699,
-    longitude: -115.1398,
-    speed: 85,
-    fuel_level: 100,
-    engine_temperature: 240,
-    tire_pressure: {
-      front_left: 31,
-      front_right: 31,
-      rear_left: 30,
-      rear_right: 30,
-    },
-    timestamp: '2022-01-01T08:45:00Z',
-  },
-  {
-    latitude: 33.749,
-    longitude: -84.388,
-    speed: 35,
-    fuel_level: 50,
-    engine_temperature: 165,
-    tire_pressure: {
-      front_left: 41,
-      front_right: 41,
-      rear_left: 40,
-      rear_right: 40,
-    },
-    timestamp: '2022-01-01T08:50:00Z',
-  },
-  {
-    latitude: 39.9526,
-    longitude: -75.1652,
-    speed: 90,
-    fuel_level: 105,
-    engine_temperature: 250,
-    tire_pressure: {
-      front_left: 30,
-      front_right: 30,
-      rear_left: 29,
-      rear_right: 29,
-    },
-    timestamp: '2022-01-01T08:55:00Z',
-  },
-  {
-    latitude: 38.9072,
-    longitude: -77.0369,
-    speed: 30,
-    fuel_level: 45,
-    engine_temperature: 155,
-    tire_pressure: {
-      front_left: 42,
-      front_right: 42,
-      rear_left: 41,
-      rear_right: 41,
-    },
-    timestamp: '2022-01-01T09:00:00Z',
+    timestamp: '2023-01-01T08:00:00Z',
   },
 ];
 
 export async function GET(request: Request) {
-  return NextResponse.json({});
+  return NextResponse.json(
+    telematicsLogs.sort(
+      (a, b) =>
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    ),
+  );
+}
+
+export async function POST(request: Request) {
+  const body = (await request.json()) as TelematicsData;
+  const newLog = {
+    ...body,
+    uuid: crypto.randomUUID(),
+    timestamp: new Date().toISOString(),
+  };
+  telematicsLogs.push(newLog);
+  return NextResponse.json(newLog);
 }
