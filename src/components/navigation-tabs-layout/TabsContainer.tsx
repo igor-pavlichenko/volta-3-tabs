@@ -4,7 +4,7 @@ import { Box, Sheet, Stack } from '@mui/joy';
 import { useQuery } from '@tanstack/react-query';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import BrakeSystemPage from '../pages/BrakeSystemPage/BrakeSystemPage';
-import NavigationPage from '../pages/NavigationPage';
+import ClimateControlPage from '../pages/ClimateControlPage/ClimateControlPage';
 import TelematicsPage from '../pages/TelematicsPage/TelematicsPage';
 import NavBar from './NavBar';
 
@@ -41,7 +41,7 @@ const TabsContainer = (props: Props) => {
               <Route path="/" element={<Navigate to="/telematics" replace />} />
               <Route path="/brake-system" element={<BrakeSystemPage />} />
               <Route path="/telematics" element={<TelematicsPage />} />
-              <Route path="/navigation" element={<NavigationPage />} />
+              <Route path="/climate-control" element={<ClimateControlPage />} />
             </Routes>
           </Sheet>
         </Stack>

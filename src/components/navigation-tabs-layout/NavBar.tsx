@@ -28,7 +28,7 @@ const NavBar = () => {
         <CustomNavLink to="/telematics">Telematics</CustomNavLink>
       </Grid>
       <Grid>
-        <CustomNavLink to="/navigation">Navigation</CustomNavLink>
+        <CustomNavLink to="/climate-control">Climate control</CustomNavLink>
       </Grid>
     </Grid>
   );
