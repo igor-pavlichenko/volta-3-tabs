@@ -1,9 +1,13 @@
 import { Grid } from '@mui/joy';
 
 import Image from 'next/image';
+import { BoardName } from '~/app/api/available-boards/route';
 import CustomNavLink from './CustomNavLink';
 
-const NavBar = () => {
+type Props = {
+  boards: Array<BoardName>;
+};
+const NavBar = ({ boards }: Props) => {
   return (
     <Grid
       container
@@ -21,15 +25,21 @@ const NavBar = () => {
           data-testid="company_logo"
         />
       </Grid>
-      <Grid>
-        <CustomNavLink to="/brake-system">Brake system</CustomNavLink>
-      </Grid>
-      <Grid>
-        <CustomNavLink to="/telematics">Telematics</CustomNavLink>
-      </Grid>
-      <Grid>
-        <CustomNavLink to="/climate-control">Climate control</CustomNavLink>
-      </Grid>
+      {boards.includes('brake-system') && (
+        <Grid>
+          <CustomNavLink to="/brake-system">Brake system</CustomNavLink>
+        </Grid>
+      )}
+      {boards.includes('telematics') && (
+        <Grid>
+          <CustomNavLink to="/telematics">Telematics</CustomNavLink>
+        </Grid>
+      )}
+      {boards.includes('climate-control') && (
+        <Grid>
+          <CustomNavLink to="/climate-control">Climate control</CustomNavLink>
+        </Grid>
+      )}
     </Grid>
   );
 };
