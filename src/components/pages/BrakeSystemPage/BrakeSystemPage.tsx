@@ -8,9 +8,8 @@ import BrakeSystemMaintenance from './maintenance/BrakeSystemMaintenance';
 import BrakeSystemStatus from './status/BrakeSystemStatus';
 
 type BrakeSystemTab = 'status' | 'maintenance';
-type Props = {};
 
-const BrakeSystemPage = (props: Props) => {
+const BrakeSystemPage = () => {
   const [tab, setTab] = useState<BrakeSystemTab>('status');
   return (
     <Stack width="100%">

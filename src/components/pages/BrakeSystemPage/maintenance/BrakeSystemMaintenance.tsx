@@ -7,9 +7,7 @@ import LoadingIndicator from '~/components/LoadingIndicator';
 import BrakeMaintenanceEntryRow from './BrakeMaintenanceEntryRow';
 import NextMaintenance from './NextMaintenance';
 
-type Props = {};
-
-const BrakeSystemMaintenance = (props: Props) => {
+const BrakeSystemMaintenance = () => {
   const endpoint = '/api/brake-system/maintenance';
   const { data, isFetching } = useQuery<BrakesMaintenanceData>({
     queryKey: [endpoint],

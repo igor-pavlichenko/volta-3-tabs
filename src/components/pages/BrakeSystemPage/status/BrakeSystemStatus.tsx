@@ -6,9 +6,7 @@ import { BrakeStatusData } from '~/app/api/brake-system/status/route';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import BrakeUnitCard from './BrakeUnitCard';
 
-type Props = {};
-
-const BrakeSystemStatus = (props: Props) => {
+const BrakeSystemStatus = () => {
   const endpoint = '/api/brake-system/status';
   const { data, isFetching } = useQuery<BrakeStatusData>({
     queryKey: [endpoint],
