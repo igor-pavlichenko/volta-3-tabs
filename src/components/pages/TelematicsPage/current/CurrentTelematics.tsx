@@ -1,6 +1,7 @@
-import { Grid, Stack, Typography } from '@mui/joy';
+import { Grid, Stack } from '@mui/joy';
 import { TelematicsData } from '~/utils';
 import Battery from './Battery';
+import LocationGrid from './LocationGrid';
 import Speed from './Speed';
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 
 const CurrentTelematics = ({ data }: Props) => {
   return (
-    <Stack gap={2}>
+    <Stack gap={4} marginTop={3}>
       <Grid container>
         <Grid xs={6}>
           <Battery
@@ -18,9 +19,7 @@ const CurrentTelematics = ({ data }: Props) => {
           />
         </Grid>
         <Grid xs={6}>
-          <Typography fontSize={25} level="body-lg">
-            {}
-          </Typography>
+          <LocationGrid value={data.coordinates} />
         </Grid>
       </Grid>
       <Speed value={data.speed} />
