@@ -1,0 +1,21 @@
+.fanRotation1 {
+  animation: rotation 6s infinite linear;
+}
+.fanRotation2 {
+  animation: rotation 2s infinite linear;
+}
+.fanRotation3 {
+  animation: rotation 1s infinite linear;
+}
+.fanRotation4 {
+  animation: rotation 0.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
