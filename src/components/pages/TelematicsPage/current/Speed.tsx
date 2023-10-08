@@ -6,7 +6,13 @@ type Props = {
 
 const Speed = ({ value }: Props) => {
   return (
-    <Stack direction="column" marginX="auto" alignItems="center" gap={0}>
+    <Stack
+      data-testid="Speed"
+      direction="column"
+      marginX="auto"
+      alignItems="center"
+      gap={0}
+    >
       <Typography textAlign="center" level="h1" fontSize={100}>
         {value}
       </Typography>

@@ -14,7 +14,7 @@ type Props = {
 
 const Battery = ({ level, temperature }: Props) => {
   return (
-    <Grid container alignItems="center">
+    <Grid data-testid="Battery" container alignItems="center">
       <Grid height={40} xs={3}>
         {(function () {
           if (level < 20) {
@@ -46,7 +46,7 @@ const Battery = ({ level, temperature }: Props) => {
 
       <Grid xs={4}>
         <Typography textAlign="center" fontSize={25} level="body-lg">
-          {level * 2}km
+          {level * 2} km
         </Typography>
       </Grid>
       <Grid xs={4}>
