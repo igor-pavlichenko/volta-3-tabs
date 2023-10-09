@@ -5,6 +5,7 @@ import { useState } from 'react';
 import RadioTab from '~/components/radio-tabs/RadioTab';
 import RadioTabsGroup from '~/components/radio-tabs/RadioTabsGroup';
 import ClimateControl from './climate/ClimateControl';
+import ClimateControlProvider from './climate/climateControlContext';
 
 type BrakeSystemTab = 'climate' | 'logs';
 
@@ -21,7 +22,9 @@ const ClimateControlPage = () => {
         <RadioTab value="logs" label="Logs" />
       </RadioTabsGroup>
 
-      {tab === 'climate' && <ClimateControl />}
+      <ClimateControlProvider>
+        {tab === 'climate' && <ClimateControl />}
+      </ClimateControlProvider>
       {tab === 'logs' && <div>logs</div>}
     </Stack>
   );

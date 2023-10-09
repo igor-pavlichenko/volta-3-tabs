@@ -1,7 +1,9 @@
 import { IconButton, Sheet, Stack } from '@mui/joy';
+import { useContext } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 import { PiFanFill } from 'react-icons/pi';
 import stylesheet from './FanControl.module.css';
+import { ClimateControlContext } from './climateControlContext';
 
 function getFanRotationClass(fanLevel: number) {
   if (fanLevel === 1) return stylesheet.fanRotation1;
@@ -11,13 +13,11 @@ function getFanRotationClass(fanLevel: number) {
   return '';
 }
 
-type Props = {
-  onIncrease: () => void;
-  onDecrease: () => void;
-  fanLevel: number;
-};
+const FanControl = () => {
+  const { fanLevel, handleIncreaseFan, handleDecreaseFan } = useContext(
+    ClimateControlContext,
+  );
 
-const FanControl = ({ onIncrease, onDecrease, fanLevel }: Props) => {
   return (
     <Sheet>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -25,7 +25,7 @@ const FanControl = ({ onIncrease, onDecrease, fanLevel }: Props) => {
           size="lg"
           sx={{ width: 64, height: 64 }}
           variant="soft"
-          onClick={onDecrease}
+          onClick={handleDecreaseFan}
         >
           <FaMinus className="MyIcon" />
         </IconButton>
@@ -40,7 +40,7 @@ const FanControl = ({ onIncrease, onDecrease, fanLevel }: Props) => {
           size="lg"
           sx={{ width: 64, height: 64 }}
           variant="soft"
-          onClick={onIncrease}
+          onClick={handleIncreaseFan}
         >
           <FaPlus className="MyIcon" />
         </IconButton>
