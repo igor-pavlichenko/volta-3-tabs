@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { TelematicsLog } from '~/app/api/telematics/route';
-import { TelematicsData } from '~/utils';
+import {
+  ClimateControlInteractionData,
+  ClimateControlInteractionLog,
+} from '~/app/api/climate-control/logs/route';
 
 const endpoint = '/api/climate-control/logs';
 
@@ -8,19 +10,19 @@ export function useAddClimateControlLog() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (body: TelematicsData) => {
+    mutationFn: async (body: ClimateControlInteractionData) => {
       return (
         await fetch(endpoint, {
           method: 'POST',
           body: JSON.stringify(body),
         })
-      ).json() as Promise<TelematicsLog>;
+      ).json() as Promise<ClimateControlInteractionLog>;
     },
     onSuccess: (response, sentBody) => {
       // Optimistically update to the new value
       queryClient.setQueryData(
         [endpoint],
-        (oldLogs: Array<TelematicsLog> | undefined) => [
+        (oldLogs: Array<ClimateControlInteractionLog> | undefined) => [
           response,
           ...(oldLogs ?? []),
         ],
@@ -34,7 +36,7 @@ export function useAddClimateControlLog() {
 }
 
 export function useGetClimateControlLogs() {
-  return useQuery<Array<TelematicsLog>>({
+  return useQuery<Array<ClimateControlInteractionLog>>({
     queryKey: [endpoint],
     queryFn: async () => (await fetch(endpoint)).json(),
   });

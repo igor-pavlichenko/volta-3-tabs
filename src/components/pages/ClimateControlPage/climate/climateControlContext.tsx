@@ -1,4 +1,5 @@
 import { PropsWithChildren, createContext, useCallback, useState } from 'react';
+import { useAddClimateControlLog } from '../climateHooks';
 
 type ClimateControlContextType = {
   fanLevel: number;
@@ -30,35 +31,47 @@ const ClimateControlProvider = ({ children }: PropsWithChildren) => {
   const [fanLevel, setFanLevel] = useState(2);
   const [targetTemp, setTargetTemp] = useState(23);
   const [acMode, setAcMode] = useState<'heat' | 'cool'>('cool');
+  const { mutate: addInteractionLog } = useAddClimateControlLog();
 
   const handleIncreaseFan = useCallback(() => {
     if (fanLevel < 4) {
-      setFanLevel((prev) => prev + 1);
+      setFanLevel((prev) => {
+        addInteractionLog({ type: 'fanLevel changed', value: prev + 1 });
+        return prev + 1;
+      });
     }
-  }, [fanLevel]);
+  }, [addInteractionLog, fanLevel]);
 
   const handleDecreaseFan = useCallback(() => {
     if (fanLevel > 0) {
-      setFanLevel((prev) => prev - 1);
+      setFanLevel((prev) => {
+        addInteractionLog({ type: 'fanLevel changed', value: prev - 1 });
+        return prev - 1;
+      });
     }
-  }, [fanLevel]);
+  }, [addInteractionLog, fanLevel]);
 
   const handleHeat = useCallback(() => {
     if (acMode !== 'heat') {
       setAcMode('heat');
+      addInteractionLog({ type: 'acModeChanged', value: 'heat' });
     }
-  }, [acMode]);
+  }, [acMode, addInteractionLog]);
   const handleCool = useCallback(() => {
     if (acMode !== 'cool') {
       setAcMode('cool');
+      addInteractionLog({ type: 'acModeChanged', value: 'cool' });
     }
-  }, [acMode]);
+  }, [acMode, addInteractionLog]);
 
   const handleTempChange = useCallback(
     (event: Event, value: number | number[], activeThumb: number) => {
-      if (typeof value === 'number') setTargetTemp(value);
+      if (typeof value === 'number') {
+        setTargetTemp(value);
+        addInteractionLog({ type: 'targetTemp changed', value: `${value}ºC` });
+      }
     },
-    [],
+    [addInteractionLog],
   );
 
   return (
